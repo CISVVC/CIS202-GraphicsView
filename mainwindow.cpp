@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     drawAxes();
     drawCircle();
     m_timer = new QTimer();
-    connect(m_timer,&QTimer::timeout,this,&MainWindow::incDeg);
+    connect(m_timer,&QTimer::timeout,this,&MainWindow::nextStep);
     m_timer->start(50);
     m_sinewave = new Wave([] (double d){return sin(d);});
     m_cosinewave = new Wave([](double d){return cos(d);},QColor(255,128,0));
@@ -43,7 +43,7 @@ void MainWindow::drawCircle() {
 }
 
 
-void MainWindow::incDeg() {
+void MainWindow::nextStep() {
     int inc = 5;
     m_circle->nextStep(5);
     m_sinewave->nextStep(5);

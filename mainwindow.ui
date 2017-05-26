@@ -87,15 +87,15 @@
    <sender>pushButton_4</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>incDeg()</slot>
+   <slot>nextStep()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>58</x>
      <y>151</y>
     </hint>
     <hint type="destinationlabel">
-     <x>45</x>
-     <y>310</y>
+     <x>74</x>
+     <y>418</y>
     </hint>
    </hints>
   </connection>
@@ -106,12 +106,12 @@
    <slot>setSpeed(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>51</x>
-     <y>330</y>
+     <x>61</x>
+     <y>335</y>
     </hint>
     <hint type="destinationlabel">
-     <x>39</x>
-     <y>378</y>
+     <x>61</x>
+     <y>486</y>
     </hint>
    </hints>
   </connection>
@@ -121,7 +121,7 @@
   <slot>drawSine()</slot>
   <slot>drawCosine()</slot>
   <slot>drawTan()</slot>
-  <slot>incDeg()</slot>
+  <slot>nextStep()</slot>
   <slot>setSpeed(int)</slot>
  </slots>
 </ui>

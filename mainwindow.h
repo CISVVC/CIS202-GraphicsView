@@ -22,7 +22,7 @@ public:
     ~MainWindow();
 
 public slots:
-    void incDeg();
+    void nextStep();
     void setSpeed(int speed);
 
 private:
