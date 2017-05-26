@@ -10,10 +10,14 @@ public:
     CircleAnim();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    void incCurrent();
+    void nextStep(int inc);
     double getRad();
+    void drawCircle(QPainter *painter);
+    QPainterPath getUnitCircle();
 private:
     int m_current;
+    int m_radius,m_csize;
+    QPainterPath m_unitcircle;
 };
 
 #endif // CIRCLEANIM_H

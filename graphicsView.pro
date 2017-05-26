@@ -15,12 +15,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     circleanim.cpp \
-    sinewave.cpp \
-    coswave.cpp
+    wave.cpp
 
 HEADERS  += mainwindow.h \
     circleanim.h \
-    sinewave.h \
-    coswave.h
+    wave.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    resources.qrc

@@ -1,21 +1,37 @@
-#include "circleanim.h"
+#include "wave.h"
 #include <cmath>
-
 typedef QPair<QPointF,QPointF> PointPair;
 
-CircleAnim::CircleAnim() :
+Wave::Wave(fN fn,const QColor &c) :
+    m_function(fn),
     m_current(0),
-    m_radius(50),
-    m_csize(5)
+    m_xres(2),
+    m_yres(100),
+    m_color(c),
+    m_logo(QPixmap(":/logo.png").scaled(QSize(30,62),Qt::KeepAspectRatio)),
+    m_pi_image(QPixmap(":/pi-symbol.png").scaled(QSize(30,62),Qt::KeepAspectRatio))
 {
-    m_unitcircle = getUnitCircle();
+    m_curve = getCurve();
 }
 
-QRectF CircleAnim::boundingRect() const{
+
+QPainterPath Wave::getCurve() {
+    QPainterPath qp;
+    QPointF lastPoint = QPointF(0.0,0.0);
+    for(int d = 0;d<360;d++) {
+       qp.moveTo(lastPoint);
+       QPointF nextPoint = QPointF(m_xres * d,-1*m_yres * m_function(d*M_PI/180.0));
+       qp.lineTo(nextPoint);
+       lastPoint = nextPoint;
+    }
+    return qp;
+}
+
+QRectF Wave::boundingRect() const{
     return QRectF(0,0,100,100);
 }
 
-void CircleAnim::nextStep(int inc) {
+void Wave::nextStep(int inc) {
     if(m_current < 360) {
        m_current+=inc;
     }
@@ -24,18 +40,15 @@ void CircleAnim::nextStep(int inc) {
     }
 }
 
-double CircleAnim::getRad() {
+double Wave::getRad() {
     return m_current * M_PI / 180.0;
 }
 
-void CircleAnim::drawCircle(QPainter* painter) {
-    painter->drawPath(m_unitcircle);
-}
-
-QPainterPath CircleAnim::getUnitCircle() {
+QPainterPath Wave::getUnitCircle(QPointF cp) {
     int ticksize = 3;
+    int m_radius = 10;
     QPainterPath qp;
-    qp.addEllipse(QPoint(0,0),m_radius,m_radius);
+    qp.addEllipse(cp,m_radius,m_radius);
     QVector<PointPair> points;
     // 0
     points.append(PointPair(
@@ -80,18 +93,32 @@ QPainterPath CircleAnim::getUnitCircle() {
 
    // build the tick marks
     for(auto pair : points) {
-        qp.moveTo(pair.first);
-        qp.lineTo(pair.second);
+        qp.moveTo(cp+pair.first);
+        qp.lineTo(cp+pair.second);
     }
+    qp.addEllipse(cp,2,2);
 
     return qp;
 }
 
-void CircleAnim::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
+void Wave::drawCircle(QPainter *painter,QPointF cp) {
+    painter->drawPath(getUnitCircle(cp));
+}
+
+void Wave::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
+    int radius = 100;
+    int c_size = 5;
     double rad = getRad();
-    drawCircle(painter);
-    painter->drawLine(QPoint(0,0),
-                      QPoint(m_radius*cos(rad),-m_radius*sin(rad)));
+    painter->setPen(m_color);
+    painter->drawPath(m_curve);
+    painter->setPen(Qt::red);
+    //painter->setBrush(Qt::red);
+    QPointF cp = QPointF(m_xres*m_current,-m_yres*m_function(getRad()));
+//    painter->drawEllipse(cp,c_size,c_size);
+//    painter->drawPixmap(cp,m_logo);
+//    painter->drawPixmap(cp+QPointF(35,0),m_pi_image);
+    drawCircle(painter,cp);
+    painter->drawLine(cp,cp+QPoint(40*cos(rad),-40*sin(rad)));
     painter->setBrush(Qt::blue);
-    painter->drawEllipse(QPoint(m_radius*cos(rad),-m_radius*sin(rad)),m_csize,m_csize);
+    painter->drawEllipse(cp+QPoint(40*cos(rad),-40*sin(rad)),c_size,c_size);
 }

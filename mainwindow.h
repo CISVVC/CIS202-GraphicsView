@@ -6,8 +6,7 @@
 #include <QGraphicsRectItem>
 #include <QTimer>
 #include "circleanim.h"
-#include "coswave.h"
-#include "sinewave.h"
+#include "wave.h"
 
 namespace Ui {
 class MainWindow;
@@ -23,9 +22,6 @@ public:
     ~MainWindow();
 
 public slots:
-    void drawSine();
-    void drawCosine();
-    void drawTan();
     void incDeg();
     void setSpeed(int speed);
 
@@ -34,12 +30,11 @@ private:
     QGraphicsScene *m_scene;
     int m_xres,m_yres;
     QGraphicsRectItem *rectangle;
-    void rotateRectangle(int degrees);
     void drawAxes();
     void drawCircle();
     CircleAnim *m_circle;
-    SineWave *m_sinewave;
-    CosineWave *m_cosinewave;
+    Wave *m_sinewave;
+    Wave *m_cosinewave;
 };
 
 #endif // MAINWINDOW_H
