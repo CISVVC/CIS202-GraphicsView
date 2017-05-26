@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>770</width>
-    <height>411</height>
+    <width>1145</width>
+    <height>837</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,21 +17,85 @@
    <widget class="QGraphicsView" name="graphicsView">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>10</y>
-      <width>641</width>
-      <height>331</height>
+      <x>110</x>
+      <y>-10</y>
+      <width>981</width>
+      <height>781</height>
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>0</x>
       <y>10</y>
-      <width>51</width>
-      <height>21</height>
+      <width>113</width>
+      <height>32</height>
      </rect>
+    </property>
+    <property name="text">
+     <string>Sine</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>40</y>
+      <width>113</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Cosine</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>70</y>
+      <width>113</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Tangent</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_4">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>100</y>
+      <width>113</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Increment</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="verticalSlider">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>150</y>
+      <width>22</width>
+      <height>160</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>0</number>
+    </property>
+    <property name="maximum">
+     <number>1000</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+    <property name="invertedAppearance">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
@@ -40,7 +104,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>770</width>
+     <width>1145</width>
      <height>22</height>
     </rect>
    </property>
@@ -59,23 +123,92 @@
  <resources/>
  <connections>
   <connection>
-   <sender>lineEdit</sender>
-   <signal>returnPressed()</signal>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>updateRotation()</slot>
+   <slot>drawSine()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>32</x>
+     <x>59</x>
      <y>58</y>
     </hint>
     <hint type="destinationlabel">
-     <x>31</x>
-     <y>103</y>
+     <x>41</x>
+     <y>157</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>drawCosine()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>79</x>
+     <y>94</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>80</x>
+     <y>205</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>drawTan()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>46</x>
+     <y>121</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>58</x>
+     <y>244</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_4</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>incDeg()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>58</x>
+     <y>151</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>45</x>
+     <y>310</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>setSpeed(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>51</x>
+     <y>330</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>39</x>
+     <y>378</y>
     </hint>
    </hints>
   </connection>
  </connections>
  <slots>
   <slot>updateRotation()</slot>
+  <slot>drawSine()</slot>
+  <slot>drawCosine()</slot>
+  <slot>drawTan()</slot>
+  <slot>incDeg()</slot>
+  <slot>setSpeed(int)</slot>
  </slots>
 </ui>

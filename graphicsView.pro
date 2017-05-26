@@ -13,8 +13,14 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    circleanim.cpp \
+    sinewave.cpp \
+    coswave.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    circleanim.h \
+    sinewave.h \
+    coswave.h
 
 FORMS    += mainwindow.ui
