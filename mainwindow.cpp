@@ -37,7 +37,6 @@ void MainWindow::drawAxes() {
 }
 
 void MainWindow::drawCircle() {
-   //auto c = m_scene->addEllipse(QRectF(0,0,100,100));
    m_circle = new CircleAnim();
    m_scene->addItem(m_circle);
    m_circle->setPos(QPointF(0,-2.25*m_yres));
