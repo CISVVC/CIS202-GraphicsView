@@ -1,1 +1,1 @@
-# CIS202-GridView
+# Demonstration of animation and trigonometry
