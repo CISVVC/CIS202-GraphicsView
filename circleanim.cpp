@@ -89,7 +89,8 @@ QPainterPath CircleAnim::getUnitCircle() {
 
 void CircleAnim::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     double rad = getRad();
-    drawCircle(painter);
+    //drawCircle(painter);
+    painter->drawPath(m_unitcircle);
     painter->drawLine(QPoint(0,0),
                       QPoint(m_radius*cos(rad),-m_radius*sin(rad)));
     painter->setBrush(Qt::blue);

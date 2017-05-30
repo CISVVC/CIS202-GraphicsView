@@ -15,11 +15,15 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     circleanim.cpp \
-    wave.cpp
+    wave.cpp \
+    legenditem.cpp \
+    axis.cpp
 
 HEADERS  += mainwindow.h \
     circleanim.h \
-    wave.h
+    wave.h \
+    legenditem.h \
+    axis.h
 
 FORMS    += mainwindow.ui
 

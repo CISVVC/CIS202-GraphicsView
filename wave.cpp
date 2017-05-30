@@ -2,15 +2,19 @@
 #include <cmath>
 typedef QPair<QPointF,QPointF> PointPair;
 
-Wave::Wave(fN fn,const QColor &c) :
+Wave::Wave(QString equation,fN fn,const QColor &c) :
+    m_equation(equation),
     m_function(fn),
     m_current(0),
     m_xres(2),
     m_yres(100),
-    m_color(c),
+    m_color(c)
+{
+    /*
+    // If we want pictures instead moving along the curve
     m_logo(QPixmap(":/logo.png").scaled(QSize(30,62),Qt::KeepAspectRatio)),
     m_pi_image(QPixmap(":/pi-symbol.png").scaled(QSize(30,62),Qt::KeepAspectRatio))
-{
+    */
     m_curve = getCurve();
 }
 
@@ -28,7 +32,7 @@ QPainterPath Wave::getCurve() {
 }
 
 QRectF Wave::boundingRect() const{
-    return QRectF(0,0,100,100);
+    return QRectF(-360,-360,360,360);
 }
 
 void Wave::nextStep(int inc) {
@@ -42,6 +46,14 @@ void Wave::nextStep(int inc) {
 
 double Wave::getRad() {
     return m_current * M_PI / 180.0;
+}
+
+QString Wave::equation() {
+   return m_equation;
+}
+
+QColor Wave::color() {
+    return m_color;
 }
 
 QPainterPath Wave::getUnitCircle(QPointF cp) {
@@ -107,9 +119,10 @@ void Wave::drawCircle(QPainter *painter,QPointF cp) {
 
 void Wave::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     int radius = 100;
+    int ball_radius = 30;
     int c_size = 5;
     double rad = getRad();
-    painter->setPen(m_color);
+    painter->setPen(QPen(m_color,0.5));
     painter->drawPath(m_curve);
     painter->setPen(Qt::red);
     //painter->setBrush(Qt::red);
@@ -118,7 +131,7 @@ void Wave::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 //    painter->drawPixmap(cp,m_logo);
 //    painter->drawPixmap(cp+QPointF(35,0),m_pi_image);
     drawCircle(painter,cp);
-    painter->drawLine(cp,cp+QPoint(40*cos(rad),-40*sin(rad)));
+    painter->drawLine(cp,cp+QPoint(ball_radius*cos(rad),-ball_radius*sin(rad)));
     painter->setBrush(Qt::blue);
-    painter->drawEllipse(cp+QPoint(40*cos(rad),-40*sin(rad)),c_size,c_size);
+    painter->drawEllipse(cp+QPoint(ball_radius*cos(rad),-ball_radius*sin(rad)),c_size,c_size);
 }
